@@ -20,3 +20,14 @@ jobs:
       - name: Maven Compile/Test
         working-directory: sgcmapi/
         run: mvn compile test
+  merge: 
+		needs: build
+		runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Merge Branch
+        uses: devmasx/merge-branch@1.4.0
+        with:
+          type: now
+          target: main
+          github_token: ${{github.token }}
